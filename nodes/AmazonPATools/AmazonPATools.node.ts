@@ -82,7 +82,7 @@ export class AmazonPATools implements INodeType {
         group: ['transform'],
         version: 1,
         subtitle: '={{$parameter["operation"]}}',
-        description: 'Search for products on Amazon and get their details (usable as Agent tool)',
+        description: 'Search for products on Amazon and get their details',
         defaults: {
             name: 'Amazon Product Search',
         },
@@ -94,7 +94,6 @@ export class AmazonPATools implements INodeType {
                 required: true,
             },
         ],
-
         properties: [
             {
                 displayName: 'Operation',
@@ -253,4 +252,4 @@ export class AmazonPATools implements INodeType {
 
         return [returnData];
     }
-}
+} 

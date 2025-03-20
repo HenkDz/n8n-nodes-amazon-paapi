@@ -84,7 +84,7 @@ export class AmazonPAToolsTool implements INodeType {
         group: ['transform'],
         version: 1,
         subtitle: '={{$parameter["operation"]}}',
-        description: 'Search for products on Amazon and get their details (Agent Tool)',
+        description: 'Search for products on Amazon using Agent (AI/LLM) tools',
         defaults: {
             name: 'Amazon Product Search Tool',
         },
