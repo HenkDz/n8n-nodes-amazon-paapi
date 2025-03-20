@@ -74,27 +74,27 @@ interface AmazonPaApiItemResponse {
     };
 }
 
-export class AmazonPATools implements INodeType {
+export class AmazonPAToolsTool implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Amazon Product Search',
-        name: 'amazonPATools',
-        icon: 'file:amazon.svg',
+        displayName: 'Amazon Product Search Tool',
+        name: 'amazonPAToolsTool',
+        icon: 'file:../AmazonPATools/amazon.svg',
         group: ['transform'],
         version: 1,
         subtitle: '={{$parameter["operation"]}}',
         description: 'Search for products on Amazon and get their details',
         defaults: {
-            name: 'Amazon Product Search',
+            name: 'Amazon Product Search Tool',
         },
         inputs: [NodeConnectionType.Main],
         outputs: [NodeConnectionType.Main],
+        usableAsTool: true,
         credentials: [
             {
                 name: 'amazonPaApi',
                 required: true,
             },
         ],
-        usableAsTool: true, // This makes it available as an agent tool
         properties: [
             {
                 displayName: 'Operation',

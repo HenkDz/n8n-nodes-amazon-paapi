@@ -5,8 +5,8 @@ import {
     INodeType,
     INodeTypeDescription,
     NodeConnectionType,
-    SupplyData,
     ISupplyDataFunctions,
+    SupplyData,
 } from 'n8n-workflow';
 
 import * as amazonPaapi from 'amazon-paapi';
@@ -255,7 +255,6 @@ export class AmazonPaApiAgentTool implements INodeType {
 
         return [returnData];
     }
-
     // This method is required for nodes that are usable as tools
     async supplyData(this: ISupplyDataFunctions, itemIndex: number): Promise<SupplyData> {
         const operation = this.getNodeParameter('operation', itemIndex, '') as string;
@@ -355,4 +354,5 @@ export class AmazonPaApiAgentTool implements INodeType {
             };
         }
     }
+
 } 
