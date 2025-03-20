@@ -5,6 +5,8 @@ import {
     INodeType,
     INodeTypeDescription,
     NodeConnectionType,
+    SupplyData,
+    ISupplyDataFunctions,
 } from 'n8n-workflow';
 
 import * as amazonPaapi from 'amazon-paapi';
@@ -88,13 +90,13 @@ export class AmazonPATools implements INodeType {
         },
         inputs: [NodeConnectionType.Main],
         outputs: [NodeConnectionType.Main],
+        usableAsTool: true,
         credentials: [
             {
                 name: 'amazonPaApi',
                 required: true,
             },
         ],
-        usableAsTool: true, // This makes it available as an agent tool
         properties: [
             {
                 displayName: 'Operation',
@@ -252,5 +254,104 @@ export class AmazonPATools implements INodeType {
         }
 
         return [returnData];
+    }
+
+    async supplyData(this: ISupplyDataFunctions, itemIndex: number): Promise<SupplyData> {
+        const operation = this.getNodeParameter('operation', itemIndex, '') as string;
+        const includeFields = this.getNodeParameter('includeFields', itemIndex, []) as string[];
+        
+        try {
+            // Get credentials
+            const credentials = await this.getCredentials('amazonPaApi') as unknown as AmazonPaApiCredentials;
+            
+            const commonParameters = {
+                AccessKey: credentials.accessKey,
+                SecretKey: credentials.secretKey,
+                PartnerTag: credentials.partnerTag,
+                Marketplace: credentials.marketplace,
+                PartnerType: 'Associates',
+                Resources: includeFields,
+            };
+
+            if (operation === 'searchProducts') {
+                const keywords = this.getNodeParameter('keywords', itemIndex, '') as string;
+
+                const searchItemsParams: amazonPaapi.SearchItemsParameters = {
+                    Keywords: keywords,
+                    Resources: includeFields,
+                    SearchIndex: 'All',
+                    ItemCount: 10,
+                };
+
+                const responseData = await amazonPaapi.SearchItems(commonParameters, searchItemsParams) as AmazonPaApiSearchResponse;
+
+                if (responseData?.SearchResult?.Items) {
+                    return {
+                        response: {
+                            success: true,
+                            operation: 'searchProducts',
+                            results: responseData.SearchResult.Items.map((item) => ({
+                                title: item.ItemInfo?.Title?.DisplayValue,
+                                asin: item.ASIN,
+                                url: `https://${credentials.marketplace}/dp/${item.ASIN}`,
+                                price: item.Offers?.Listings?.[0]?.Price?.DisplayAmount,
+                                imageUrl: item.Images?.Primary?.Medium?.URL,
+                                rating: item.CustomerReviews?.StarRating?.DisplayValue,
+                                reviewCount: item.CustomerReviews?.Count,
+                                features: item.ItemInfo?.Features?.DisplayValues,
+                            })),
+                        },
+                    };
+                }
+            } else if (operation === 'getProductDetails') {
+                const asin = this.getNodeParameter('asin', itemIndex, '') as string;
+
+                const getItemsParams: amazonPaapi.GetItemsParameters = {
+                    ItemIds: [asin],
+                    Resources: includeFields,
+                };
+
+                const responseData = await amazonPaapi.GetItems(commonParameters, getItemsParams) as AmazonPaApiItemResponse;
+
+                if (responseData?.ItemsResult?.Items?.[0]) {
+                    const item = responseData.ItemsResult.Items[0];
+                    return {
+                        response: {
+                            success: true,
+                            operation: 'getProductDetails',
+                            product: {
+                                title: item.ItemInfo?.Title?.DisplayValue,
+                                asin: item.ASIN,
+                                url: `https://${credentials.marketplace}/dp/${item.ASIN}`,
+                                price: item.Offers?.Listings?.[0]?.Price?.DisplayAmount,
+                                imageUrl: item.Images?.Primary?.Medium?.URL,
+                                rating: item.CustomerReviews?.StarRating?.DisplayValue,
+                                reviewCount: item.CustomerReviews?.Count,
+                                features: item.ItemInfo?.Features?.DisplayValues,
+                                brand: item.ItemInfo?.ByLineInfo?.Brand?.DisplayValue,
+                                description: item.ItemInfo?.ProductInfo?.ProductDescription?.DisplayValue,
+                            },
+                        },
+                    };
+                }
+            }
+            
+            // Return empty response if no results found
+            return {
+                response: {
+                    success: false,
+                    error: 'No results found',
+                    operation,
+                },
+            };
+        } catch (error) {
+            return {
+                response: {
+                    success: false,
+                    error: error instanceof Error ? error.message : 'An unknown error occurred',
+                    operation,
+                },
+            };
+        }
     }
 } 

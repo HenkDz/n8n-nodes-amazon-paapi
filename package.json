@@ -1,6 +1,6 @@
 {
   "name": "@henkey/n8n-nodes-amazon-paapi",
-  "version": "0.3.3",
+  "version": "0.2.9",
   "description": "n8n node for Amazon Affiliate API (PA API 5.0) with enhanced features including OffersV2 support, advanced filtering, and better error handling",
   "keywords": [
     "n8n-community-node-package",
@@ -41,8 +41,7 @@
     "n8nNodesApiVersion": 1,
     "nodes": [
       "dist/nodes/AmazonPA/AmazonPA.node.js",
-      "dist/nodes/AmazonPATools/AmazonPATools.node.js",
-      "dist/nodes/AmazonPAAgentTool/AmazonPaApiAgentTool.node.js"
+      "dist/nodes/AmazonPATools/AmazonPATools.node.js"
     ],
     "credentials": [
       "dist/credentials/AmazonPaApi.credentials.js"
