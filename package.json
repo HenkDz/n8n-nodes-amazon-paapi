@@ -40,7 +40,8 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "nodes": [
-      "dist/nodes/AmazonPA/AmazonPA.node.js"
+      "dist/nodes/AmazonPA/AmazonPA.node.js",
+      "dist/nodes/AmazonPATools/AmazonPATools.node.js"
     ],
     "credentials": [
       "dist/credentials/AmazonPaApi.credentials.js"
