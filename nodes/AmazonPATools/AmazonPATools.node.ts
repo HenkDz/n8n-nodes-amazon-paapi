@@ -5,8 +5,6 @@ import {
     INodeType,
     INodeTypeDescription,
     NodeConnectionType,
-    SupplyData,
-    ISupplyDataFunctions,
 } from 'n8n-workflow';
 
 import * as amazonPaapi from 'amazon-paapi';
@@ -256,7 +254,7 @@ export class AmazonPATools implements INodeType {
         return [returnData];
     }
 
-    async supplyData(this: ISupplyDataFunctions, itemIndex: number): Promise<SupplyData> {
+    /*async supplyData(this: ISupplyDataFunctions, itemIndex: number): Promise<SupplyData> {
         const operation = this.getNodeParameter('operation', itemIndex, '') as string;
         const includeFields = this.getNodeParameter('includeFields', itemIndex, []) as string[];
         
@@ -353,5 +351,5 @@ export class AmazonPATools implements INodeType {
                 },
             };
         }
-    }
+    }*/
 } 
