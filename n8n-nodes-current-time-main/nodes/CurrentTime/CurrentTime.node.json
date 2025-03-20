@@ -1,0 +1,21 @@
+{
+	"node": "n8n-nodes-base.currentTime",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"name": "CurrentTime",
+	"description": "Returns current date and time",
+	"icon": "clock.svg",
+	"alias": [
+		"time"
+	],
+	"categories": [
+		"Time",  "Utility"
+	],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/berk/n8n-nodes-current-time"
+			}
+		]
+	}
+}

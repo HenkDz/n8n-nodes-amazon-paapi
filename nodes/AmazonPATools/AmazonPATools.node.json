@@ -1,0 +1,35 @@
+{
+    "node": "n8n-nodes-base.amazonPATools",
+    "nodeVersion": "1.0",
+    "codexVersion": "1.0",
+    "categories": [
+        "Sales",
+        "E-commerce"
+    ],
+    "resources": {
+        "primaryDocumentation": [
+            {
+                "url": "https://github.com/your-repo/n8n-nodes-amazon-paapi"
+            }
+        ],
+        "generic": [
+            {
+                "label": "Search and get product details from Amazon",
+                "icon": "🛍️",
+                "url": "https://github.com/your-repo/n8n-nodes-amazon-paapi/blob/main/docs/using-amazon-pa-tools.md"
+            }
+        ]
+    },
+    "subcategories": {
+        "Core Nodes": [
+            "Data"
+        ]
+    },
+    "alias": [
+        "Amazon",
+        "Product",
+        "Search",
+        "PAAPI",
+        "Shopping"
+    ]
+} 
