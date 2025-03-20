@@ -1,6 +1,6 @@
 {
   "name": "@henkey/n8n-nodes-amazon-paapi",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "n8n node for Amazon Affiliate API (PA API 5.0) with enhanced features including OffersV2 support, advanced filtering, and better error handling",
   "keywords": [
     "n8n-community-node-package",
