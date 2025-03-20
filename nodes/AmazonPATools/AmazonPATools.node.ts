@@ -81,6 +81,7 @@ export class AmazonPATools implements INodeType {
         icon: 'file:amazon.svg',
         group: ['transform'],
         version: 1,
+        subtitle: '={{$parameter["operation"]}}',
         description: 'Search for products on Amazon and get their details',
         defaults: {
             name: 'Amazon Product Search',
