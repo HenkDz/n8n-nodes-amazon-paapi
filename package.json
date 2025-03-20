@@ -42,7 +42,7 @@
     "nodes": [
       "dist/nodes/AmazonPA/AmazonPA.node.js",
       "dist/nodes/AmazonPATools/AmazonPATools.node.js",
-      "dist/nodes/AmazonPAAgentTool/AmazonPaApiAgentTool.node.ts"
+      "dist/nodes/AmazonPAAgentTool/AmazonPaApiAgentTool.node.js"
     ],
     "credentials": [
       "dist/credentials/AmazonPaApi.credentials.js"
