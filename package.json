@@ -10,14 +10,14 @@
     "e-commerce"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/your-repo/n8n-nodes-amazon-paapi",
+  "homepage": "https://github.com/HenkDz/n8n-nodes-amazon-paapi",
   "author": {
-    "name": "Your Name",
-    "email": "your.email@example.com"
+    "name": "Nour",
+    "email": "nour@nwheb.co.uk"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-repo/n8n-nodes-amazon-paapi.git"
+    "url": "https://github.com/HenkDz/n8n-nodes-amazon-paapi.git"
   },
   "engines": {
     "node": ">=18.10",
